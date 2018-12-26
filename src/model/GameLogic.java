@@ -78,14 +78,56 @@ public class GameLogic {
                 checkAscenderDiagonal(gameField);
     }
 
-    private boolean checkDescenderDiagonal(GameField gameField){
-        // TODO: 25-Dec-18 realise the method
-        return false;
+    private boolean checkDescenderDiagonal(GameField gameField) {
+        boolean isLineFound = false;
+        for (int i = 0; i <= gameField.getHeight() - LINE_LENGTH; i++) {
+            if (i > 0 && isLineFound)
+                break;
+            else {
+                for (int j = 0; j <= gameField.getWidth() - LINE_LENGTH; j++) {
+                    if (j > 0 && isLineFound)
+                        break;
+                    else {
+                        for (int k = 1; k < LINE_LENGTH; k++) {
+                            if (gameField.getCellValue(j, i) != '_' &&
+                                    gameField.getCellValue(j, i) == gameField.getCellValue(j + k, i + k)) {
+                                isLineFound = true;
+                            } else {
+                                isLineFound = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return isLineFound;
     }
 
-    private boolean checkAscenderDiagonal(GameField gameField){
-        // TODO: 25-Dec-18 realise the method 
-        return false;
+    private boolean checkAscenderDiagonal(GameField gameField) {
+        boolean isLineFound = false;
+        for (int i = 0; i <= gameField.getHeight() - LINE_LENGTH; i++) {
+            if (i > 0 && isLineFound)
+                break;
+            else {
+                for (int j = 0; j <= gameField.getWidth() - LINE_LENGTH; j++) {
+                    if (j > 0 && isLineFound)
+                        break;
+                    else {
+                        for (int k = 0; k < LINE_LENGTH - 1; k++) {
+                            if (gameField.getCellValue(j + k, i + LINE_LENGTH - 1 - k) != '_' &&
+                                    gameField.getCellValue(j + k, i + LINE_LENGTH - 1 - k) == gameField.getCellValue(j + k + 1, i + LINE_LENGTH - k - 1 - 1)) {
+                                isLineFound = true;
+                            } else {
+                                isLineFound = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return isLineFound;
     }
 
     public int getLINE_LENGTH() {
