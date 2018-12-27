@@ -4,6 +4,7 @@ import beans.GameField;
 
 public class GameLogic {
     private final int LINE_LENGTH;
+    private char linedMark;
 
     public GameLogic(int gameFieldWidth, int gameFieldHeight) {
         // TODO: 18-Dec-18 check logic of line length setting
@@ -21,6 +22,7 @@ public class GameLogic {
                 checkDiagonal(gameField);
     }
 
+    //region private methods to check Lines
     private boolean checkHorizontal(GameField gameField) {
         boolean isLineFound = false;
         for (int i = 0; i < gameField.getHeight(); i++) {
@@ -35,6 +37,7 @@ public class GameLogic {
                             if (gameField.getCellValue(j, i) != '_' &&
                                     gameField.getCellValue(j, i) == gameField.getCellValue(j + k, i)) {
                                 isLineFound = true;
+                                linedMark = gameField.getCellValue(j, i);
                             } else {
                                 isLineFound = false;
                                 break;
@@ -61,6 +64,7 @@ public class GameLogic {
                             if (gameField.getCellValue(i, j) != '_' &&
                                     gameField.getCellValue(i, j) == gameField.getCellValue(i, j + k)) {
                                 isLineFound = true;
+                                linedMark = gameField.getCellValue(i, j);
                             } else {
                                 isLineFound = false;
                                 break;
@@ -92,6 +96,7 @@ public class GameLogic {
                             if (gameField.getCellValue(j, i) != '_' &&
                                     gameField.getCellValue(j, i) == gameField.getCellValue(j + k, i + k)) {
                                 isLineFound = true;
+                                linedMark = gameField.getCellValue(j, i);
                             } else {
                                 isLineFound = false;
                                 break;
@@ -118,6 +123,7 @@ public class GameLogic {
                             if (gameField.getCellValue(j + k, i + LINE_LENGTH - 1 - k) != '_' &&
                                     gameField.getCellValue(j + k, i + LINE_LENGTH - 1 - k) == gameField.getCellValue(j + k + 1, i + LINE_LENGTH - k - 1 - 1)) {
                                 isLineFound = true;
+                                linedMark = gameField.getCellValue(j + k, i + LINE_LENGTH - 1 - k);
                             } else {
                                 isLineFound = false;
                                 break;
@@ -129,8 +135,13 @@ public class GameLogic {
         }
         return isLineFound;
     }
+    //endregion
 
     public int getLINE_LENGTH() {
         return LINE_LENGTH;
+    }
+
+    public char getLinedMark() {
+        return linedMark;
     }
 }

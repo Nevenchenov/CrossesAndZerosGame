@@ -29,8 +29,16 @@ public class GameField {
         gameField[x][y] = value;
     }
 
+    public void fillCell(Coordinate coord, char value) {
+        gameField[coord.getX()][coord.getY()] = value;
+    }
+
     public char getCellValue(int x, int y) {
         return gameField[x][y];
+    }
+
+    public void restoreGameField(){
+        fillGameField();
     }
 
     private void fillGameField() {

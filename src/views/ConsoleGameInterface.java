@@ -40,7 +40,7 @@ public class ConsoleGameInterface implements GameInterface {
 
         System.out.printf("Input vertical cell number as integer from 1 up to %d and press Enter", gameFieldHeight);
         try {
-            x = Integer.parseInt(reader.readLine()) - 1;
+            y = Integer.parseInt(reader.readLine()) - 1;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,6 +50,18 @@ public class ConsoleGameInterface implements GameInterface {
     @Override
     public void showResult(String message){
         System.out.println(message);
+    }
+
+    @Override
+    public boolean surveyDoPlayMore() {
+        String userResponse = "N";
+        System.out.println("Do You want to play again? Please, input 'Y' or 'N' and press Enter...");
+        try {
+            userResponse = reader.readLine().toUpperCase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return userResponse.equals("Y");
     }
 
     @Override
